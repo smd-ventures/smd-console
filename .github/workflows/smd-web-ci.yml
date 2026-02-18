@@ -73,4 +73,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy smd-web/dist/ --project-name=smd-web
+          workingDirectory: smd-web
+          command: pages deploy dist/ --project-name=smd-web
