@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { SITE } from '../config/site'
+---
+
+<BaseLayout title="Contact" description="Contact SMDurgan, LLC.">
+  <h1 class="page-title">Contact</h1>
+  <p>For venture, partnership, or operating questions, send a message.</p>
+
+  <div id="notice-sent" class="notice ok" hidden>Message sent. Thank you.</div>
+  <div id="notice-validation" class="notice err" hidden>
+    Please check your form fields and try again.
+  </div>
+  <div id="notice-server" class="notice err" hidden>
+    Message delivery failed. Email <a href={`mailto:${SITE.contactEmail}`}
+      >{SITE.contactEmail}</a
+    > directly.
+  </div>
+
+  <form action="/api/contact" method="post" class="card section">
+    <label for="name">Name</label>
+    <input id="name" name="name" required maxlength="200" />
+
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email" required maxlength="254" />
+
+    <label for="message">Message</label>
+    <textarea id="message" name="message" required maxlength="5000" rows="7"
+    ></textarea>
+
+    <input
+      type="text"
+      name="website"
+      tabindex="-1"
+      autocomplete="off"
+      style="position:absolute;left:-9999px"
+      aria-hidden="true"
+    />
+
+    <button type="submit">Send message</button>
+  </form>
+
+  <script is:inline>
+    const hash = window.location.hash
+    const map = {
+      '#sent': 'notice-sent',
+      '#error-validation': 'notice-validation',
+      '#error-server': 'notice-server',
+    }
+    const id = map[hash]
+    if (id) {
+      const el = document.getElementById(id)
+      if (el) el.hidden = false
+    }
+  </script>
+</BaseLayout>

@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { SITE } from '../config/site'
+---
+
+<BaseLayout
+  title="Legal"
+  description="Legal and privacy information for SMDurgan, LLC."
+>
+  <h1 class="page-title">Legal</h1>
+
+  <section class="section card">
+    <h2>Privacy</h2>
+    <p>
+      We collect limited personal information submitted through the contact form
+      for direct business communication only. We do not sell personal data.
+    </p>
+  </section>
+
+  <section class="section card">
+    <h2>Terms</h2>
+    <p>
+      Site content is provided for informational purposes. Access and use imply
+      acceptance of updates to these terms.
+    </p>
+  </section>
+
+  <section class="section card">
+    <h2>Contact</h2>
+    <p>
+      Legal and privacy inquiries: <a href={`mailto:${SITE.contactEmail}`}
+        >{SITE.contactEmail}</a
+      >
+    </p>
+  </section>
+</BaseLayout>

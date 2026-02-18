@@ -1,0 +1,76 @@
+name: SMD Web CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'smd-web/**'
+      - '.github/workflows/smd-web-ci.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'smd-web/**'
+      - '.github/workflows/smd-web-ci.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: smd-web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: smd-web/package-lock.json
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm audit --audit-level=high
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: smd-dist
+          path: smd-web/dist/
+
+  lighthouse:
+    needs: build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: smd-web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: smd-dist
+          path: smd-web/dist/
+      - name: Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          uploadArtifacts: true
+          configPath: ./smd-web/lighthouserc.json
+
+  deploy:
+    needs: [build, lighthouse]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: smd-dist
+          path: smd-web/dist/
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy smd-web/dist/ --project-name=smd-web
