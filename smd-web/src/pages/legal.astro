@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { SITE } from '../config/site'
 ---
 
 <BaseLayout
@@ -12,10 +11,10 @@ import { SITE } from '../config/site'
   <section class="section card">
     <h2>Privacy Policy</h2>
     <p>
-      This site collects personal information only through the contact form:
-      your name, email address, and message. This information is used solely to
-      respond to your inquiry and is sent via Resend to hello@smdurgan.com. It
-      is not shared with third parties, sold, or used for marketing.
+      This site collects personal information only through the
+      <a href="/contact/">contact form</a>: your name, email address, and
+      message. This information is used solely to respond to your inquiry. It is
+      not shared with third parties, sold, or used for marketing.
     </p>
     <p>
       This site uses Google Analytics to understand aggregate traffic patterns
@@ -29,8 +28,8 @@ import { SITE } from '../config/site'
       described above.
     </p>
     <p>
-      To request deletion of any data submitted through the contact form, email
-      <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+      To request deletion of any data submitted through the contact form, use
+      the <a href="/contact/">contact page</a>.
     </p>
   </section>
 
@@ -55,11 +54,10 @@ import { SITE } from '../config/site'
   </section>
 
   <section class="section card">
-    <h2>Contact</h2>
+    <h2>Questions</h2>
     <p>
-      For legal or privacy inquiries: <a href={`mailto:${SITE.contactEmail}`}
-        >{SITE.contactEmail}</a
-      >
+      For legal or privacy inquiries, use the
+      <a href="/contact/">contact form</a>.
     </p>
   </section>
 </BaseLayout>

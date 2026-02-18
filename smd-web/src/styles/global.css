@@ -113,6 +113,12 @@ a:hover {
   flex-wrap: wrap;
 }
 
+.nav-list a,
+.footer-nav a {
+  text-decoration: none;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
