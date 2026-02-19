@@ -26,11 +26,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: radial-gradient(
-    circle at 10% 0%,
-    #2a2a4e 0%,
-    var(--smd-chrome) 55%
-  );
+  background: var(--smd-chrome);
   color: var(--smd-text);
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.6;

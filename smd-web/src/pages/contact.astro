@@ -102,7 +102,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
           .then(function (res) {
             if (res.ok) {
               showNotice('notice-sent')
-              form.reset()
+              form.style.display = 'none'
             } else if (res.status >= 400 && res.status < 500) {
               showNotice('notice-validation')
             } else {
