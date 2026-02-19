@@ -17,6 +17,11 @@
   box-sizing: border-box;
 }
 
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 html,
 body {
   margin: 0;
@@ -29,6 +34,10 @@ body {
   color: var(--smd-text);
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.6;
+}
+
+body {
+  min-height: 100vh;
 }
 
 a {
@@ -54,13 +63,13 @@ a:hover {
 .site-header,
 .site-footer {
   border-bottom: 1px solid var(--smd-border);
-  background: color-mix(in srgb, var(--smd-chrome) 85%, black 15%);
+  background: var(--smd-chrome);
 }
 
 .site-footer {
   border-top: 1px solid var(--smd-border);
   border-bottom: none;
-  margin-top: 3rem;
+  margin-top: 0;
 }
 
 .footer-inner {
@@ -89,6 +98,7 @@ a:hover {
 .footer-nav a {
   color: var(--smd-text-muted);
   text-decoration: none;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-nav a:hover {
@@ -112,7 +122,16 @@ a:hover {
   text-decoration: none;
   color: var(--smd-text);
   font-weight: 700;
-  letter-spacing: 0.04em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  word-spacing: -0.15em;
+}
+
+.brand:hover,
+.brand:hover span {
+  color: var(--smd-gold-hover);
 }
 
 .brand span {
@@ -122,10 +141,15 @@ a:hover {
 .nav-list {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   margin: 0;
   padding: 0;
   flex-wrap: wrap;
+}
+
+.nav-list li {
+  margin: 0;
+  padding: 0;
 }
 
 .nav-list a {
@@ -137,9 +161,10 @@ a:hover {
 .nav-list a:hover {
   color: var(--smd-text);
 }
-.footer-nav a {
-  text-decoration: none;
-  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+
+.nav-list a[aria-current='page'] {
+  color: var(--smd-accent);
+  font-weight: 600;
 }
 
 .card-grid {
