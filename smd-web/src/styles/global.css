@@ -10,7 +10,7 @@
   --smd-gold: #dbb05c;
   --smd-gold-hover: #e8c474;
   --smd-text-inverse: #1a1a2e;
-  --smd-max-width: 900px;
+  --smd-max-width: 768px;
 }
 
 * {
@@ -44,6 +44,11 @@ a:hover {
   max-width: var(--smd-max-width);
   margin: 0 auto;
   padding: 0 1rem;
+}
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
 }
 
 .site-header,
